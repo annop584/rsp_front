@@ -1,0 +1,36 @@
+$title-size: 3rem;
+$login-button-width: 10rem;
+$login-button-height: 3rem;
+$login-button-fontsize: 1.4rem;
+$login-button-text-margin-left: 0.7rem;
+
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    h1{
+        font-size: $title-size;
+    }
+
+    p{
+        text-align: center;
+
+        button{
+            width: $login-button-width;
+            height: $login-button-height;
+
+            font-size: $login-button-fontsize;
+
+            span{
+                margin-left: $login-button-text-margin-left;
+            }
+        }
+    } 
+}
