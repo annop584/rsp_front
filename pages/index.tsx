@@ -1,10 +1,20 @@
+import useChecksignin from "@/src/hooks/useChecksignin";
 import type { NextPage } from "next";
+import Router from "next/router";
+import { useEffect } from "react";
 
-import useCheckLogin from "@/src/hooks/useCheckLogin";
+// import useCheckLogin from "@/src/hooks/useCheckLogin";
 
 const Home: NextPage = () => {
-  useCheckLogin();
-
+  const { isSignin } = useChecksignin();
+  useEffect(() => {
+    if (isSignin) {
+      Router.push("/gameplay");
+    } else {
+      Router.push("/login");
+    }
+    console.log(isSignin);
+  }, [isSignin]);
   return <div></div>;
 };
 

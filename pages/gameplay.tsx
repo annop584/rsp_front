@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { signOut } from "next-auth/react";
-import useCheckLogin from "@/src/hooks/useCheckLogin";
 import Loader from "@/components/Loader";
 import RSPsymbol from "@/components/RSPsymbol";
 import { RSP_TYPE } from "@/src/constants/gameplay";
 import styles from "@/styles/pages/Gameplay.module.scss";
+import useChecksignin from "@/src/hooks/useChecksignin";
+import useSignout from "@/src/hooks/useSignout";
+import Router from "next/router";
 
 type Props = {};
 
@@ -13,23 +14,28 @@ export default function Gameplay({}: Props) {
   const [yourScore, setyourScore] = useState<number>(0);
   const [highScore, sethighScore] = useState<number>(0);
   const [randomRSPenemy, setrandomRSPenemy] = useState<number>(RSP_TYPE.RIDDLE);
-  const { isLogin } = useCheckLogin();
+  const { isSignin } = useChecksignin();
+  const { signOut } = useSignout();
 
   const selectRSP = (selected_rsp: number) => {
     setnowRSP(selected_rsp);
   };
 
   useEffect(() => {
-    //get highScore
-    //get yourScore
-  }, []);
+    if (isSignin == false) {
+      Router.push("/login");
+    } else {
+    }
+  }, [isSignin]);
 
   return (
     <div className={styles.container}>
-      {isLogin ? (
+      {isSignin == true && (
         <>
           <div className={styles.header_layout}>
-            <h3>Gameplay {nowRSP}</h3>
+            <h3>
+              Gameplay {nowRSP} {isSignin}
+            </h3>
             <button onClick={() => signOut()}>Sign out</button>
           </div>
           <div className={styles.gameplay_content_wrap}>
@@ -53,7 +59,8 @@ export default function Gameplay({}: Props) {
             </div>
           </div>
         </>
-      ) : (
+      )}
+      {isSignin == undefined && (
         <>
           <Loader />
         </>
