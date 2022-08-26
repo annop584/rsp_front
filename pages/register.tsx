@@ -3,29 +3,34 @@ import { useEffect } from "react";
 import Router from "next/router";
 import styles from "@/styles/pages/Login.module.scss";
 import Loader from "@/components/Loader";
-import useSignin from "@/src/hooks/useSignin";
+import useSignup from "@/src/hooks/useSignup";
 import useChecksignin from "@/src/hooks/useChecksignin";
-import Link from "next/link";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 type Props = {};
-type UserLoginForm = {
+type UserRegisterForm = {
   email: string;
   password: string;
+  confirmpassword: string;
 };
 
-export default function Login({}: Props) {
+export default function Register({}: Props) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { signIn } = useSignin();
+  const [confirmpassword, setconfirmpassword] = useState("");
+  const { signUp } = useSignup();
   const { isSignin } = useChecksignin();
 
   //react hookform
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string().required("Password is required"),
+    confirmpassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
   const {
@@ -33,10 +38,10 @@ export default function Login({}: Props) {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserLoginForm>(formOptions);
+  } = useForm<UserRegisterForm>(formOptions);
 
-  const loginapi = async () => {
-    const valid = await signIn(email, password);
+  const registerapi = async () => {
+    const valid = await signUp(email, password);
     if (valid.success == true) {
       Router.push("/gameplay");
     } else {
@@ -50,11 +55,14 @@ export default function Login({}: Props) {
   const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
     setpassword(event.currentTarget.value);
   };
+  const setConfirmpassword = (event: React.FormEvent<HTMLInputElement>) => {
+    setconfirmpassword(event.currentTarget.value);
+  };
 
-  const onSubmit = handleSubmit((data: UserLoginForm) => {
-    console.log("UserLoginForm");
+  const onSubmit = handleSubmit((data: UserRegisterForm) => {
+    console.log("UserRegisterForm");
     console.log(data);
-    loginapi();
+    registerapi();
   });
   //end react hookform
 
@@ -109,15 +117,29 @@ export default function Login({}: Props) {
                   )}
                 </label>
 
-                <Link href="register">
-                  <a>register</a>
-                </Link>
+                <label>
+                  ConfirmPassword
+                  <br></br>
+                  <input
+                    type="password"
+                    {...register("confirmpassword")}
+                    onChange={setConfirmpassword}
+                    value={confirmpassword}
+                  />
+                  {errors.confirmpassword ? (
+                    <p className={styles.errortext}>
+                      {errors.confirmpassword?.message}
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+                </label>
               </div>
 
               <p>
                 {" "}
                 <button type="submit">
-                  <span>Login</span>
+                  <span>Register</span>
                 </button>
               </p>
             </form>

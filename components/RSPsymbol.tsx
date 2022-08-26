@@ -3,10 +3,11 @@ import { RSP_TYPE } from "@/src/constants/gameplay";
 import styles from "@/styles/components/RSPsymbol.module.scss";
 type Props = {
   type: number;
+  isDisabled: boolean;
   selectRspFunc?: (rsp: number) => void;
 };
 
-export default function RSPsymbol({ type, selectRspFunc }: Props) {
+export default function RSPsymbol({ type, isDisabled, selectRspFunc }: Props) {
   const [symbol, setsymbol] = useState<string>("♥️");
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function RSPsymbol({ type, selectRspFunc }: Props) {
       }`}
     >
       <button
-        disabled={type == RSP_TYPE.RIDDLE}
+        disabled={isDisabled}
         onClick={() => {
           if (type != RSP_TYPE.RIDDLE && selectRspFunc != undefined) {
             selectRspFunc(type);

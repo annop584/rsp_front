@@ -11,6 +11,11 @@ $form-label-input-margintop: 0.6rem;
 $form-label-input-width: 100%;
 $form-label-input-height: 2rem;
 
+$register-button-color: rgb(144, 144, 144);
+$error-text-color: rgb(255, 96, 96);
+$error-text-fontsize: 0.8rem;
+
+
 
 .center{
     position: absolute;
@@ -28,9 +33,19 @@ $form-label-input-height: 2rem;
         flex-direction: column;
         font-size: $form-fontsize;
         margin-bottom: $form-marginbottom;
-        
+
+      
+
         label{
             margin-bottom: $form-label-marginbottom;
+         
+
+            .errortext{
+                text-align: right;
+                color:$error-text-color;
+                font-size: $error-text-fontsize;
+            }
+
             input{
                 margin-top: $form-label-input-margintop;
                 width: $form-label-input-width;
@@ -41,7 +56,7 @@ $form-label-input-height: 2rem;
         a{
             text-align: right;
             font-size: 1rem;
-            color: rgb(144, 144, 144);
+            color: $register-button-color;
         }
     }
 
