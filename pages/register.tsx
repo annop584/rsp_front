@@ -83,6 +83,7 @@ export default function Register({}: Props) {
                   Email
                   <br></br>
                   <input
+                    id="email"
                     type="email"
                     {...register("email")}
                     onChange={setEmail}
@@ -99,6 +100,7 @@ export default function Register({}: Props) {
                   Password
                   <br></br>
                   <input
+                    id="password"
                     type="password"
                     {...register("password")}
                     onChange={setPassword}
@@ -117,6 +119,7 @@ export default function Register({}: Props) {
                   ConfirmPassword
                   <br></br>
                   <input
+                    id="confirmpassword"
                     type="password"
                     {...register("confirmpassword")}
                     onChange={setConfirmpassword}
@@ -134,7 +137,7 @@ export default function Register({}: Props) {
 
               <p>
                 {" "}
-                <button type="submit">
+                <button id="submit" type="submit">
                   <span>Register</span>
                 </button>
               </p>

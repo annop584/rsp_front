@@ -38,6 +38,7 @@ export default function RSPsymbol({ type, isDisabled, selectRspFunc }: Props) {
       }`}
     >
       <button
+        id={symbol}
         disabled={isDisabled}
         onClick={() => {
           if (type != RSP_TYPE.RIDDLE && selectRspFunc != undefined) {

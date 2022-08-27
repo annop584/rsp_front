@@ -75,6 +75,7 @@ export default function Login({}: Props) {
                   Email
                   <br></br>
                   <input
+                    id="email"
                     type="email"
                     {...register("email")}
                     onChange={setEmail}
@@ -91,6 +92,7 @@ export default function Login({}: Props) {
                   Password
                   <br></br>
                   <input
+                    id="password"
                     type="password"
                     {...register("password")}
                     onChange={setPassword}
@@ -112,7 +114,7 @@ export default function Login({}: Props) {
 
               <p>
                 {" "}
-                <button type="submit">
+                <button id="submit" type="submit">
                   <span>Login</span>
                 </button>
               </p>

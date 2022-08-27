@@ -101,7 +101,9 @@ export default function Gameplay({}: Props) {
         <>
           <div className={styles.header_layout}>
             <h3>Hi: {username}</h3>
-            <button onClick={() => signOut()}>Sign out</button>
+            <button id="signout" onClick={() => signOut()}>
+              Sign out
+            </button>
           </div>
           <div className={styles.gameplay_content_wrap}>
             <div className={styles.show_score_layout}>
@@ -114,7 +116,7 @@ export default function Gameplay({}: Props) {
             </div>
             <hr></hr>
             <div className={styles.rps_selection_vertical_layout}>
-              <h1>{resultText == "" ? "🤖" : resultText}</h1>
+              <h1 id="result">{resultText == "" ? "🤖" : resultText}</h1>
               <RSPsymbol type={randomRSPenemy} isDisabled={true} />
             </div>
             <div className={styles.rps_selection_horizon_layout}>
