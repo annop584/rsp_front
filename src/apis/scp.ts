@@ -3,6 +3,7 @@ import { mainAPI } from "./config";
 export interface TypeRespDataScores {
   yourscore: number;
   highscore: number;
+  isnewhigh?: boolean;
 }
 
 export interface TypeRespFormatScores {

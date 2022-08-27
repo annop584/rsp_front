@@ -60,8 +60,6 @@ export default function Register({}: Props) {
   };
 
   const onSubmit = handleSubmit((data: UserRegisterForm) => {
-    console.log("UserRegisterForm");
-    console.log(data);
     registerapi();
   });
   //end react hookform
@@ -69,10 +67,8 @@ export default function Register({}: Props) {
   useEffect(() => {
     if (isSignin) {
       Router.push("/gameplay");
-      console.log("loginn");
     } else {
     }
-    console.log(isSignin);
   }, [isSignin]);
 
   return (

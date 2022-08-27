@@ -52,8 +52,6 @@ export default function Login({}: Props) {
   };
 
   const onSubmit = handleSubmit((data: UserLoginForm) => {
-    console.log("UserLoginForm");
-    console.log(data);
     loginapi();
   });
   //end react hookform
@@ -61,10 +59,8 @@ export default function Login({}: Props) {
   useEffect(() => {
     if (isSignin) {
       Router.push("/gameplay");
-      console.log("loginn");
     } else {
     }
-    console.log(isSignin);
   }, [isSignin]);
 
   return (

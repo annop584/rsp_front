@@ -13,7 +13,6 @@ const Home: NextPage = () => {
     } else {
       Router.push("/login");
     }
-    console.log(isSignin);
   }, [isSignin]);
   return <div></div>;
 };

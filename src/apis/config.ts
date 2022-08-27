@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const mainAPI = axios.create({
-  baseURL: "http://localhost:3050/api",
+  baseURL: process.env.NEXT_PUBLIC_ENDPOINT + "/api",
 });

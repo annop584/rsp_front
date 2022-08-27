@@ -11,6 +11,8 @@ import useGetbotrsp from "@/src/hooks/useGetbotrsp";
 import { rspResult } from "@/src/utils/rsputils";
 import useSendWin from "@/src/hooks/useSendWin";
 import { getEmail } from "@/src/utils/jwtutil";
+import { io } from "socket.io-client";
+const socket = io(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
 type Props = {};
 
@@ -26,6 +28,16 @@ export default function Gameplay({}: Props) {
   const { isSignin } = useChecksignin();
   const { signOut } = useSignout();
   const { sendWin } = useSendWin();
+
+  //socket
+  const sendHighscore2socket = (highScore: number) => {
+    socket.emit("msgToServer", highScore);
+  };
+
+  socket.on("msgToClient", (data: number) => {
+    sethighScore(data);
+  });
+  //end socket
 
   const setNewScore = (new_score: number, new_high_score: number) => {
     setyourScore(new_score);
@@ -50,6 +62,9 @@ export default function Gameplay({}: Props) {
           const respdata = await sendWin();
           if (respdata.success && respdata.data) {
             setNewScore(respdata.data.yourscore, respdata.data.highscore);
+            if (respdata.data.isnewhigh) {
+              sendHighscore2socket(respdata.data.highscore);
+            }
           }
         } else {
         }

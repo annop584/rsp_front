@@ -42,8 +42,6 @@ export const signIn = async (
         };
         return resp_obj;
       } else {
-        console.log(err);
-
         let resp_obj = {
           success: false,
           data: null,
@@ -84,8 +82,6 @@ export const signUp = async (
         };
         return resp_obj;
       } else {
-        console.log(err);
-
         let resp_obj = {
           success: false,
           data: null,
